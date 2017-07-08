@@ -43,17 +43,20 @@ class HostParser
 
   IPV4_REGEXP = /has address (.+)$/
   IPV4_KEY = "ipv4"
+  IPV4_TITLE = "Host IPv4"
   IPV6_REGEXP = /has IPv6 address (.+)$/
   IPV6_KEY = "ipv6"
+  IPV6_TITLE = "Host IPv6"
+
 
   def self.parse(output)
     host = {}
 
     result = output.match(IPV4_REGEXP)
-    host["ipv4"] = result[1] if result
+    host[IPV4_KEY] = {IPV4_TITLE => result[1]} if result
 
     result = output.match(IPV6_REGEXP)
-    host["ipv6"] = result[1] if result
+    host[IPV6_KEY] = {IPV6_TITLE => result[1]} if result
 
     host
   end
