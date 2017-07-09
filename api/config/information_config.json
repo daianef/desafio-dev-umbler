@@ -1,0 +1,70 @@
+{
+	"domain_section": {
+    
+    "title": "Informações do Domínio",
+
+    "unique_values": [
+      "domain", "domain_name", "registry_domain_id", "ownerid",
+      "sponsoring_registrar_iana_id", "updated_date", "changed",
+      "creation_date", "created", "expiration_date", "expires",
+      "registrar", "ipv4", "ipv6"
+    ],
+
+    "multiple_values": [
+      "status"
+    ]
+  },
+
+  "name_servers_section": {
+    
+    "title": "Name Servers",
+
+    "unique_values": [],
+
+    "multiple_values": [
+      "name_server"
+    ]
+  },
+
+  "registrant_contact_section": {
+    
+    "title": "Contato do Registrante",
+
+    "unique_values": [
+      "registrant_name", "registrant_organization",
+      "registrant_street", "registrant_city",
+      "registrant_postal_code", "registrant_country",
+      "registrant_phone", "registrant_email"
+    ],
+
+    "multiple_values": []
+  },
+
+  "admin_contact_section": {
+    
+    "title": "Contato do Administrador",
+
+    "unique_values": [
+      "admin_name", "admin_organization",
+      "admin_street", "admin_city",
+      "admin_postal_code", "admin_country",
+      "admin_phone", "admin_email"
+    ],
+
+    "multiple_values": []
+  },
+
+  "tech_contact_section": {
+    
+    "title": "Contato Técnico",
+
+    "unique_values": [
+      "tech_name", "tech_organization",
+      "tech_street", "tech_city",
+      "tech_postal_code", "tech_country",
+      "tech_phone", "tech_email"
+    ],
+
+    "multiple_values": []
+  }
+}
