@@ -1,5 +1,3 @@
-# bin/bh
-
 docker build -t ruby-whois .
 
 docker run \
