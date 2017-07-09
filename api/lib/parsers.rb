@@ -10,7 +10,12 @@ class WhoisParser
 
 	#
   # Metodo que obtem, de cada linha, as informacoes
-  # do dominio e retorna em um Hash
+  # do dominio retornadas pelo comando 'whois' e 
+  # retorna elas em um Hash.
+  # Cada posicao do hash possui uma chave que corresponde 
+  # ao nome da informacao (ex: Domain Name) transformando
+  # as letras em minusculas e trocando espacos por '_'
+  # (ex: domain_name).
   #
   def self.parse(output)
     whois = {}
@@ -47,7 +52,6 @@ class HostParser
   IPV6_REGEXP = /has IPv6 address (.+)$/
   IPV6_KEY = "ipv6"
   IPV6_TITLE = "Host IPv6"
-
 
   def self.parse(output)
     host = {}
