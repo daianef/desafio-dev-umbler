@@ -79,11 +79,100 @@ class TestHostParser < Minitest::Test
     assert_equal(expected, domain_info.get_section("test_section"))
   end
 
+  def test_get_section_with_unique_and_multiple_values
+    infos = {
+      "name_server" => [
+        {"Name Server" => "test1.com"}, 
+        {"Name Server" => "test2.com"}, 
+        {"Name Server" => "test3.com"}, 
+        {"Name Server" => "TEST1.COM"}
+      ], 
+      "status" => {"Status" => "abc"},
+      "domain_name" => [
+        {"Domain Name"=>"TEST.COM"}, {"Domain Name"=>"TEST.COM"}
+      ], 
+      "updated_date" => {"Updated Date" => "08-jul-2017"}
+    }
+
+    config = {
+      "test_section" => {
+        
+        "title" => "Test",
+
+        "unique_values" => [
+          "domain", "domain_name", 
+          "updated_date"
+        ],
+
+        "multiple_values" => [
+          "status",
+          "name_server"
+        ]
+      }
+    }
+
+    expected = {
+      "title" => "Test",
+      "section_values" => {
+        "Domain Name" => "TEST.COM",
+        "Updated Date" => "08-jul-2017",
+        "Name Server" => ["test1.com", "test2.com", "test3.com"],
+        "Status" => "abc"
+      }
+    }
+
+    domain_info = DomainInformation.new(infos, config)
+    assert_equal(expected, domain_info.get_section("test_section"))
+  end
+
   def test_get_section_no_existent
-    
+    infos = {
+      "test" => {"Test" => "abc"}
+    }
+
+    config = {
+      "test1_section" => {
+        
+        "title" => "Test",
+
+        "unique_values" => [],
+
+        "multiple_values" => [
+          "status",
+          "name_server"
+        ]
+      }
+    }
+
+    expected = {}
+
+    domain_info = DomainInformation.new(infos, config)
+    assert_equal(expected, domain_info.get_section("no_section"))
   end
 
   def test_get_section_empty
+    infos = {
+      "test" => {},
+      "abc" => {"Abc" => "abc"}
+    }
 
+    config = {
+      "test1_section" => {
+        
+        "title" => "Test",
+
+        "unique_values" => [],
+
+        "multiple_values" => [
+          "status",
+          "name_server"
+        ]
+      }
+    }
+
+    expected = {'title' => "Test", "section_values" => {}}
+
+    domain_info = DomainInformation.new(infos, config)
+    assert_equal(expected, domain_info.get_section("test1_section"))
   end
 end

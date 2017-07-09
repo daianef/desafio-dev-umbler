@@ -12,14 +12,14 @@ class DomainInformation
   end
 
   def get_section(key)
-    return nil unless @config.has_key? key
+    return {} unless @config.has_key? key
 
     section = @config[key]
 
     infos = {}
     infos[TITLE] = get_title(section)
     infos[SECTION] = get_unique_values(section)
-    infos[SECTION].merge(get_multiple_values(section))  
+    infos[SECTION].merge!(get_multiple_values(section))
 
     infos
   end
