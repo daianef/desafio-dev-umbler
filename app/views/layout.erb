@@ -57,8 +57,26 @@
               $('#loading').hide();
               $('#domain').html(data);
               $('#domain').goTo();
+              $('#update_button').show();
             }
-          }).done();
+          });
+        });
+
+      $('#search_update').click(function(ev){
+          ev.preventDefault();
+          $('#domain').empty();
+          $('#loading').html("<img src='images/loading.gif' height='20%' width='20%'><br>Carregando...");
+          $('#loading').show();
+          $.ajax({
+            url: "/search_domain",
+            data: "update_key="+"true"+"&info="+$("#search_form input:first").val(),
+            dataType: "html",
+            success: function(data) {
+              $('#loading').hide();
+              $('#domain').html(data);
+              $('#domain').goTo();
+            }
+          });
         });
       });
     </script>

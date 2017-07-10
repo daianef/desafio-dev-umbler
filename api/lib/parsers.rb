@@ -43,7 +43,7 @@ class WhoisParser
       end
     end
 
-    whois['raw'] = output
+    whois[RAW_ENTRY] = output
 
     whois
   end

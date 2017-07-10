@@ -12,6 +12,7 @@ end
 
 get '/search_domain' do
   @domain = params[:info]
+  update_cache = params[:update_key]
 
   if @domain.empty?
     @message = "Digite um domínio para pesquisar."
@@ -19,10 +20,10 @@ get '/search_domain' do
 
   else
     domain_explorer = DomainExplorer.new
-    infos = domain_explorer.get_domain_information(@domain)
+    infos = domain_explorer.get_domain_information(@domain, update_cache)
 
     @domain_infos = infos[:parsed]
-    @raw = infos[:raw]
+    @raw = infos[:raw].to_s
 
     if @domain_infos.empty?
       @message = "Nenhum resultado disponível."
@@ -47,6 +48,7 @@ __END__
 </div>
 <div id="loading"></div>
 <div id="domain""></div>
+<p id="update_button" style="display:none;"><button type='submit' id="search_update" class='btn btn-lg btn-dafault'>Atualizar</button></p>
 
 @@ show
 <div class="header clearfix">

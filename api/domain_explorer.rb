@@ -30,8 +30,8 @@ class DomainExplorer
   # Retorna as informacoes do dominio, usando a cache,
   # em formato "parseado" e raw
   #
-  def get_domain_information(domain, config=CONFIG)
-    info_hash = cache(domain)
+  def get_domain_information(domain, force_update, config=CONFIG)
+    info_hash = cache(domain, force_update)
     config = JSON.parse(File.read(CONFIG))
 
     domain_info = DomainInformation.new(info_hash, config)
@@ -49,10 +49,10 @@ class DomainExplorer
   # Caso contrario, consulta os servidores
   # para obter as informacoes.
   #
-  def cache(key)
+  def cache(key, force_update)
     value = {}
 
-    if @redis[key]
+    if @redis[key] and !force_update
       value = JSON.parse(@redis.get(key))
     else
       value = @domain_information_class.to_hash(key)
