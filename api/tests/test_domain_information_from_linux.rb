@@ -33,13 +33,10 @@ BLOCK
     assert_equal({}, DomainInformationFromLinux.host('test.com'))
   end
 
-  # def test_to_hash
-  #   class_mock = mock()
-  #   DomainInformationFromLinux.expects(:class).returns(class_mock)
+  def test_to_hash
+    DomainInformationFromLinux.expects(:whois).with("test.com").returns({'abc' => '123'})
+    DomainInformationFromLinux.expects(:host).with("test.com").returns({'IP' => '1.1.1.1'})
 
-  #   class_mock.expects(:whois).with("test.com").returns({})
-  #   class_mock.expects(:host).with("test.com").returns({})
-
-  #   assert_equal({}, DomainInformationFromLinux.to_hash("test.com"))
-  # end
+    assert_equal({'abc' => '123', 'IP' => '1.1.1.1'}, DomainInformationFromLinux.to_hash("test.com"))
+  end
 end

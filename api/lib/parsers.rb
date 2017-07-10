@@ -3,10 +3,13 @@ class WhoisParser
 
   # Expressao regular para obter os dados de interesse
   # (informacoes do dominio) em cada linha
-  LINE_REGEXP = /^([ A-Za-z0-9-]+):(.+)$/
+  LINE_REGEXP = /^([A-Za-z0-9][ A-Za-z0-9-]+):(.+)$/
 
   # Separador para parsear a saida do comando de whois
   SPLIT_CHARACTER = "\n"
+
+  # Entrada para saida completa do comando
+  RAW_ENTRY = 'raw'
 
 	#
   # Metodo que obtem, de cada linha, as informacoes
@@ -39,6 +42,8 @@ class WhoisParser
         whois[key] = hash
       end
     end
+
+    whois['raw'] = output
 
     whois
   end

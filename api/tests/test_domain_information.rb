@@ -175,4 +175,49 @@ class TestHostParser < Minitest::Test
     domain_info = DomainInformation.new(infos, config)
     assert_equal(expected, domain_info.get_section("test1_section"))
   end
+
+  def test_get_raw_information
+    infos = {
+      "test" => {},
+      "abc" => {"Abc" => "abc"},
+      "raw" => "Abc: abc"
+    }
+
+    config = {
+      "test1_section" => {
+        
+        "title" => "Test",
+
+        "unique_values" => ['abc'],
+
+        "multiple_values" => []
+      }
+    }
+
+    domain_info = DomainInformation.new(infos, config)
+    assert_equal("Abc: abc", domain_info.get_raw_information())
+  end
+
+  def test_get_informations
+    infos = {
+      "test" => {},
+      "abc" => {"Abc" => "abc"}
+    }
+
+    config = {
+      "test1_section" => {
+        
+        "title" => "Test",
+
+        "unique_values" => ['abc'],
+
+        "multiple_values" => []
+      }
+    }
+
+    expected = [{'title' => "Test", "section_values" => {"Abc" => "abc"}}]
+
+    domain_info = DomainInformation.new(infos, config)
+    assert_equal(expected, domain_info.get_informations())
+  end
 end

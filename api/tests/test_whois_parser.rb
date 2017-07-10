@@ -17,11 +17,12 @@ BLOCK
       "test_2" => {"Test 2" => "def"},
       "test_3" => {"Test 3" => "ghi"},
       "abc" => {"Abc" => "123"},
+      "raw" => "Test 1: abc\nTest 2: def\nTest 3: ghi\nAbc: 123\n"
     }
 
     @output_invalid = "abcdef"
 
-    @expected_invalid = {}
+    @expected_invalid = {"raw" => "abcdef"}
   end
 
   def test_parse

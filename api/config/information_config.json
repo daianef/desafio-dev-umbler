@@ -7,11 +7,12 @@
       "domain", "domain_name", "registry_domain_id", "ownerid",
       "sponsoring_registrar_iana_id", "updated_date", "changed",
       "creation_date", "created", "expiration_date", "expires",
-      "registrar", "ipv4", "ipv6"
+      "registrar", "ipv4", "ipv6", "registrar_registration_expiration_date",
+     "registrar_registration_creation_date", "registrar_registration_updated_date"
     ],
 
     "multiple_values": [
-      "status"
+      "status", "domain_status"
     ]
   },
 
