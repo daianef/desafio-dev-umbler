@@ -19,8 +19,8 @@ class DomainInformationFromLinux
 
   def self.to_hash(domain)
     infos = {}
-    infos.merge(self.class.whois(domain))
-    infos.merge(self.class.host(domain))
+    infos.merge!(whois(domain))
+    infos.merge!(host(domain))
 
     infos
   end

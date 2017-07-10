@@ -11,6 +11,15 @@ class DomainInformation
     @config = info_config
   end
 
+  def get_informations
+    infos = []
+    @config.keys.each do |key|
+      infos << get_section(key)
+    end
+
+    infos
+  end
+
   def get_section(key)
     return {} unless @config.has_key? key
 
