@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  app:
+    container_name: app-domain-explorer
+    build: .
+    image: domain-explorer
+    ports:
+      - "80:80"
+    env_file:
+      - ./app/app.env
+      - ./api/api.env
+    depends_on:
+      - redis
+    volumes:
+      - .:/usr/src/app
+
+  redis:
+    container_name: redis-domain-explorer
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
